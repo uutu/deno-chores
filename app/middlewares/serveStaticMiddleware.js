@@ -12,4 +12,4 @@ const serveStaticMiddleware = async (context, next) => {
     }
 };
 
-expot { serveStaticMiddleware };
+export { serveStaticMiddleware };
