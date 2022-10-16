@@ -1,9 +1,14 @@
-import { serve } from "https://deno.land/std@0.140.0/http/server.ts";
+import { Application } from "./deps.js";
+import { errorMiddleware } from "./middlewares/errorMiddleware.js";
+import { renderMiddleware } from "./middlewares/renderMiddleware.js";
+import { serveStaticMiddleware } from "./middlewares/"
 
-const handleRequest = (request) => {
-  console.log(`Request to ${request.url}`);
-  return new Response("Hello world!");
-};
+import { router } from "./routes/routes.js";
 
-console.log("Launching server on port 7777");
-serve(handleRequest, { port: 7777 });
+const app = new Application();
+
+app.use(errorMiddleware);
+app.use(renderMiddleware);
+app.use(router.routes());
+
+app.listen({ port: 7777 });
