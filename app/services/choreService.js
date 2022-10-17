@@ -67,7 +67,7 @@ const completeChore = async (choreId, userId) => {
       { id: choreId }
     );
   
-    const coins = coinsRes[0].chorecoins;
+    const coins = coinsRes[0].chorecoins; // Reads undefined..
     if (coins === 0) {
       return;
     }
