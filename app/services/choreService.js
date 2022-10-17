@@ -17,10 +17,10 @@ const addChore = async (userId, title, description, chorecoins, dueDate) => {
 
 const claimChore = async (choreId, userId) => {
     await executeQuery(
-        `INSERT INTO chore_assignments
-        (chore_id, user_id, created_at) VALUES
+      `INSERT INTO chore_assignments
+      (chore_id, user_id, created_at) VALUES
         ($choreId, $userId, NOW())`,
-        { choreId: choreId, userId: userId },
+      { choreId: choreId, userId: userId },
     );
 };
 
@@ -57,35 +57,35 @@ const listUserChores = async (userId) => {
 
 const completeChore = async (choreId, userId) => {
     await executeQuery(
-        `UPDATE chore_assignments SET completed_at = NOW()
-        WHERE chore_id = $choreId AND user_id = $userId`,
-        { choreId: choreId, userId: userId }
+      `UPDATE chore_assignments SET completed_at = NOW()
+          WHERE chore_id = $choreId AND user_id = $userId`,
+      { choreId: choreId, userId: userId }
     );
-
+  
     const coinsRes = await executeQuery(
-        "SELECT chorecoins FROM chores WHERE id = $id",
-        { id: choreId }
+      "SELECT chorecoins FROM chores WHERE id = $id",
+      { id: choreId }
     );
-    
+  
     const coins = coinsRes[0].chorecoins;
     if (coins === 0) {
-        return;
+      return;
     }
-
+  
     await executeQuery(
-        `UPDATE users SET
-            chorecoins = chorecoins + $coins
-            WHERE id = $userId`,
-        { coins: coins, userId: userId }
+      `UPDATE users SET
+          chorecoins = chorecoins + $coins
+          WHERE id = $userId`,
+      { coins: coins, userId: userId }
     );
-
+  
     await executeQuery(
-        `UPDATE users SET
-            chorecoins = chorecoins - $coins
-            WHERE id IN (SELECT user_id FROM chores WHERE id = $choreId)`,
-        { coins: coins, choreId: choreId }
+      `UPDATE users SET
+          chorecoins = chorecoins - $coins
+          WHERE id IN (SELECT user_id FROM chores WHERE id = $choreId)`,
+      { coins: coins, choreId: choreId }
     );
-};
+  };
 
 export { 
     addChore, 

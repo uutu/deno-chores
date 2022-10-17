@@ -54,7 +54,7 @@ const claimChore = async ({ params, response, user }) => {
 const listChores = async ({ render, user }) => {
     render("chores.eta", {
         availableChores: await choreService.listAvailableChores(),
-        claimChores: await choreService.listUserChores(user.id),
+        claimedChores: await choreService.listUserChores(user.id),
     });
 };
 
