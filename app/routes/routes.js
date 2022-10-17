@@ -2,6 +2,7 @@ import { Router } from "https://deno.land/x/oak@v10.6.0/mod.ts";
 import * as mainController from "./controllers/mainController.js";
 import * as choreController from "./controllers/choreController.js";
 import * as registrationController from "./controllers/registrationController.js";
+import * as loginController from "./controllers/loginController.js";
 
 const router = new Router();
 
@@ -14,5 +15,8 @@ router.post("/chores/:id/complete", choreController.completeChore);
 
 router.get("/auth/register", registrationController.showRegistrationForm);
 router.post("/auth/register", registrationController.registerUser);
+
+router.get("/auth/login", loginController.showLoginForm);
+router.post("/auth/login", loginController.processLogin);
 
 export { router };
