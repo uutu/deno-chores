@@ -46,6 +46,16 @@
 
 <h2>Add a chore!</h2>
 
+<% if (it.validationErrors) { %>
+<ul>
+    <% Object.keys(it.validationErrors).forEach((attribute) => { %>
+        <% Object.values(it.validationErrors[attribute]).forEach((err) => { %>
+            <li><%= err %></li>
+        <% }); %>
+    <% }); %>
+</ul>
+<% } %>
+
 <form method="POST" action="/chores">
     Title:<br/>
     <input type="text" name="title" /> <br/>
