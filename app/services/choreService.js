@@ -32,4 +32,33 @@ const listChores = async () => {
     return res.rows;
 };
 
-export { addChore, claimChore, listChores };
+const listAvailableChores = async () => {
+    const res = await executeQuery(`SELECT * FROM chores
+        WHERE (due_date is NULL OR due_date > NOW())
+        AND id NOT IN (SELECT chore_id FROM chore_assignments)
+    `);
+
+    return res.rows;
+};
+
+const listUserChores = async (userId) => {
+    const res = await executeQuery(
+        `SELECT * FROM chores
+        WHERE id IN (
+            SELECT chore_id FROM chore_assignments
+            WHERE user_id = $userId AND completed_at IS NULL
+        )
+        `,
+        { userId: userId }
+    );
+
+    return res.rows;
+};
+
+export { 
+    addChore, 
+    claimChore, 
+    listChores,
+    listAvailableChores,
+    listUserChores,
+};
