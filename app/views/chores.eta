@@ -57,13 +57,13 @@
 <% } %>
 
 <form method="POST" action="/chores">
-    Title:<br/>
-    <input type="text" name="title" /> <br/>
-    Description:<br/>
-    <textarea name="description"></textarea><br/>
-    Chorecoins:<br/>
-    <input type="number" name="chorecoins"/><br/>
-    Due date:<br/>
-    <input type="date" name="due_date" /> <br/>
-    <input type="submit" value="Add"/>
+Title:<br/>
+<input type="text" name="title" value="<%= it.title ? it.title : "" %>"/><br/>
+Description:<br/>
+<textarea name="description"><%= it.description ? it.description : "" %></textarea><br/>
+Chorecoins:<br/>
+<input type="number" name="chorecoins" value="<%= it.chorecoins ? it.chorecoins : "0" %>" /><br/>
+Due date:<br/>
+<input type="date" name="due_date" value="<%= it.due_date ? it.due_date : "" %>" /><br/>
+<input type="submit" value="Add"/>
 </form>
