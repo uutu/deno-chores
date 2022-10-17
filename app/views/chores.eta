@@ -10,6 +10,9 @@
 <% it.claimedChores.forEach(chore => { %>
     <li>
         <%= chore.title %> ( <% chore.chorecoins %> cc)
+        <form method="POST" action="/chores/<%= chore.id %>/complete">
+            <input type="submit" value="Complete"/>
+        </form>
     </li>
 <% }); %>
 </ul>

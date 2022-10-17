@@ -32,4 +32,10 @@ const listChores = async ({ render }) => {
     });
 };
 
-export { addChore, claimChore, listChores };
+const completeChore = async ({ params, response }) => {
+    await choreService.completeChore(params.id, 1);
+
+    response.redirect("/chores");
+};
+
+export { addChore, claimChore, completeChore, listChores };
