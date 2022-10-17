@@ -1,4 +1,5 @@
 import { executeQuery } from "../../database/database.js";
+import { renderFile } from "../../deps.js";
 import * as choreService from "../../services/choreService.js";
 
 const addChore = async ({ request, response }) => {
@@ -15,11 +16,11 @@ const addChore = async ({ request, response }) => {
         params.get("due_date"),
     );
 
-    response.redirect("/");
+    response.redirect("/chores");
 };
 
-const listChores = async ({ response }) => {
-    response.body = await choreService.listChores();
+const listChores = async ({ render }) => {
+    render("chores.eta", { chores: await choreService.listChores() });
 };
 
 export { addChore, listChores };
