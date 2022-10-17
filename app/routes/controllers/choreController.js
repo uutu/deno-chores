@@ -1,3 +1,4 @@
+import { executeQuery } from "../../database/database.js";
 import * as choreService from "../../services/choreService.js";
 
 const addChore = async ({ request, response }) => {
@@ -17,4 +18,8 @@ const addChore = async ({ request, response }) => {
     response.redirect("/");
 };
 
-export { addChore };
+const listChores = async ({ response }) => {
+    response.body = await choreService.listChores();
+};
+
+export { addChore, listChores };

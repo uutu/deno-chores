@@ -15,4 +15,12 @@ const addChore = async (userId, title, description, chorecoins, dueDate) => {
     );
 };
 
-export { addChore };
+const listChores = async () => {
+    const res = await executeQuery(`SELECT * FROM chores
+        WHERE (due_date IS NULL OR due_date > NOW())
+        `);
+
+    return res.rows;
+};
+
+export { addChore, listChores };

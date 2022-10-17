@@ -2,6 +2,22 @@
 
 <h1>Chores!</h1>
 
+<h2>Current chores</h2>
+
+<% if (it.chores && it.chores.length > 0) { %>
+
+<ul>
+<% it.chores.forEach(chore => { %>
+    <li><%= chore.title %> (<%= chore.chorecoins %> cc)</li>
+<% }); %>
+</ul>
+
+<% } else { %>
+
+<p>None available.</p>
+
+<% } %>
+
 <h2>Add a chore!</h2>
 
 <form method="POST" action="/chores">

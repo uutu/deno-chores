@@ -6,6 +6,7 @@ const router = new Router();
 
 router.get("/", mainController.showMain);
 
+router.get("/chores", choreController.listChores);
 router.post("/chores", choreController.addChore);
 
 export { router };
