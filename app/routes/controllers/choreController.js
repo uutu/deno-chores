@@ -6,6 +6,14 @@ const addChore = async ({ request, response }) => {
 
     console.log(params);
 
+    await choreService.addChore(
+        1,
+        params.get("title"),
+        params.get("description"),
+        params.get("chorecoins"),
+        params.get("due_date"),
+    );
+
     response.redirect("/");
 };
 
