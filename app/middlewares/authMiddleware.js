@@ -3,10 +3,6 @@ const restrictedPaths = ["/chores"];
 const authMiddleware = async (context, next) => {
     const user = await context.state.session.get("user");
 
-    if (user) {
-        context.user = user;
-    }
-
     if (
         !user && restrictedPaths.some((path) =>
             context.request.url.pathname.startsWith(path)
