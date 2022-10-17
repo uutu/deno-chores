@@ -36,10 +36,10 @@ const addChore = async ({ request, response, render, user }) => {
     } else {
         await choreService.addChore(
             user.id,
-            params.get("title"),
-            params.get("description"),
-            params.get("chorecoins"),
-            params.get("due_date"),
+            choreData.title,
+            choreData.description,
+            choreData.chorecoins,
+            choreData.due_date,
         );
         response.redirect("/chores");
     }  
