@@ -19,8 +19,14 @@ const addChore = async ({ request, response }) => {
     response.redirect("/chores");
 };
 
+const claimChore = async ({ params, response }) => {
+    await choreService.claimChore(params.id, 1);
+
+    response.redirect("/chores");
+};
+
 const listChores = async ({ render }) => {
     render("chores.eta", { chores: await choreService.listChores() });
 };
 
-export { addChore, listChores };
+export { addChore, claimChore, listChores };

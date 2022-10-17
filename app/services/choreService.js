@@ -15,6 +15,15 @@ const addChore = async (userId, title, description, chorecoins, dueDate) => {
     );
 };
 
+const claimChore = async (choreId, userId) => {
+    await executeQuery(
+        `INSERT INTO chore_assignments
+        (chore_id, user_id, created_at) VALUES
+        ($choreId, $userId, NOW())`,
+        { choreId: choreId, userId: userId },
+    );
+};
+
 const listChores = async () => {
     const res = await executeQuery(`SELECT * FROM chores
         WHERE (due_date IS NULL OR due_date > NOW())
@@ -23,4 +32,4 @@ const listChores = async () => {
     return res.rows;
 };
 
-export { addChore, listChores };
+export { addChore, claimChore, listChores };

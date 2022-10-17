@@ -8,5 +8,6 @@ router.get("/", mainController.showMain);
 
 router.get("/chores", choreController.listChores);
 router.post("/chores", choreController.addChore);
+router.post("/chores/:id/claim", choreController.claimChore);
 
 export { router };
